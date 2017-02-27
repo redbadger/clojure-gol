@@ -1,6 +1,6 @@
-(ns game-of-life.core-test
+(ns game-of-life.game-test
   (:require [clojure.test :refer :all]
-            [game-of-life.core :refer :all]))
+            [game-of-life.game :refer :all]))
 
 (deftest new-grid-test
   (testing "creates an empty 2x2 grid"
@@ -84,9 +84,9 @@
 
   (testing "prints multiple cells"
     (let [grid [[true false true true]]]
-      (is (= "o   o o" (to-string grid)))))
+      (is (= "o . o o" (to-string grid)))))
 
   (testing "prints multiple rows"
     (let [grid [[true false true true]
                 [false false true false]]]
-      (is (= "o   o o\n    o  " (to-string grid))))))
+      (is (= "o . o o\n. . o ." (to-string grid))))))
