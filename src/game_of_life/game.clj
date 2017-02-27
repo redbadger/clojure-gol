@@ -43,6 +43,13 @@
               (range w))))
         (range h)))))
 
+(defn random-grid
+  "Creates a random grid with a probability of cell"
+  [width height prob]
+  (grid-map
+    (fn [_ _ _] (if (< (rand) prob) true false))
+    (new-grid width height)))
+
 (defn game-step
   "For a given grid returns the next step of the game"
   [grid]

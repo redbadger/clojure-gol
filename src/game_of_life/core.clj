@@ -2,10 +2,7 @@
     (:require [game-of-life.game :refer :all]))
 
 (def initial-grid
-  (-> (new-grid 5 5)
-    (assoc-cell 1 2 true)
-    (assoc-cell 2 2 true)
-    (assoc-cell 3 2 true)))
+  (random-grid 80 60 0.4))
 
 (defn clear
   []
