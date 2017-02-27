@@ -80,13 +80,13 @@
 (deftest to-string-test
   (testing "prints a single cell"
     (let [grid [[true]]]
-      (is (= "o" (to-string grid)))))
+      (is (= "o" (to-string grid "o" ".")))))
 
   (testing "prints multiple cells"
     (let [grid [[true false true true]]]
-      (is (= "o . o o" (to-string grid)))))
+      (is (= "o . o o" (to-string grid "o" ".")))))
 
   (testing "prints multiple rows"
     (let [grid [[true false true true]
                 [false false true false]]]
-      (is (= "o . o o\n. . o ." (to-string grid))))))
+      (is (= "o . o o\n. . o ." (to-string grid "o" "."))))))

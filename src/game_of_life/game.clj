@@ -58,10 +58,10 @@
 
 (defn to-string
   "Print a grid as a multi-line string"
-  [grid]
+  [grid cell empty]
   (->> grid
     (grid-map
       (fn [x y v]
-        (if v "o" ".")))
+        (if v cell empty)))
     (map #(join " " %))
     (join "\n")))
