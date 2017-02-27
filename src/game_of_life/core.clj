@@ -46,8 +46,10 @@
   "For a given grid returns the next step of the game"
   [grid]
   (grid-map grid
-    (fn [x y _]
+    (fn [x y v]
       (let [n (count-neighbours grid x y)]
         (cond
-          (< n 2) false
-          :else true)))))
+          (and (true? v) (< n 2)) false ; cell with less than two neighbours dies
+          (and (true? v) (> n 3)) false ; cell with four or more neighbours dies
+          (and (false? v) (= n 3)) true ; three neighbours create a cell
+          :else v))))) ; else cell stays the same
