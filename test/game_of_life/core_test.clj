@@ -51,12 +51,14 @@
           expected-grid (new-grid 2 2)
           actual-grid (game-step grid)]
       (is (= actual-grid expected-grid))))
+
   (testing "two cells die"
     (let [grid [[true true]
                 [false false]]
           expected-grid (new-grid 2 2)
           actual-grid (game-step grid)]
       (is (= actual-grid expected-grid))))
+
   (testing "three cells survive and another one gets created"
     (let [grid [[true true]
                 [true false]]
@@ -64,6 +66,7 @@
                          [true true]]
           actual-grid (game-step grid)]
       (is (= actual-grid expected-grid))))
+
   (testing "cell with four neighbours dies"
     (let [grid [[false true false]
                 [true true true]
@@ -73,3 +76,17 @@
                          [true true true]]
           actual-grid (game-step grid)]
       (is (= actual-grid expected-grid)))))
+
+(deftest to-string-test
+  (testing "prints a single cell"
+    (let [grid [[true]]]
+      (is (= "o" (to-string grid)))))
+
+  (testing "prints multiple cells"
+    (let [grid [[true false true true]]]
+      (is (= "o   o o" (to-string grid)))))
+
+  (testing "prints multiple rows"
+    (let [grid [[true false true true]
+                [false false true false]]]
+      (is (= "o   o o\n    o  " (to-string grid))))))

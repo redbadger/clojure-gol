@@ -1,4 +1,5 @@
-(ns game-of-life.core)
+(ns game-of-life.core
+    (:require [clojure.string :refer [join]]))
 
 (defn new-grid
   "Creates a new grid width by height"
@@ -30,9 +31,9 @@
 
 (defn grid-map
   "Maps over the grid applying a function of arguments [x y val]"
-  [grid map-fn]
-  (let [w (count grid)
-        h (count (get grid 0))]
+  [map-fn grid]
+  (let [h (count grid)
+        w (count (get grid 0))]
     (vec
       (map
         (fn [y]
@@ -45,11 +46,22 @@
 (defn game-step
   "For a given grid returns the next step of the game"
   [grid]
-  (grid-map grid
+  (grid-map
     (fn [x y v]
       (let [n (count-neighbours grid x y)]
         (cond
           (and (true? v) (< n 2)) false ; cell with less than two neighbours dies
           (and (true? v) (> n 3)) false ; cell with four or more neighbours dies
           (and (false? v) (= n 3)) true ; three neighbours create a cell
-          :else v))))) ; else cell stays the same
+          :else v))) ; else cell stays the same
+    grid))
+
+(defn to-string
+  "Print a grid as a multi-line string"
+  [grid]
+  (->> grid
+    (grid-map
+      (fn [x y v]
+        (if v "o" " ")))
+    (map #(join " " %))
+    (join "\n")))
