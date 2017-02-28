@@ -44,7 +44,7 @@
         (range h)))))
 
 (defn random-grid
-  "Creates a random grid with a probability of cell"
+  "Creates a random grid of size 'width' by 'height' given a probability of a cell being alive"
   [width height prob]
   (grid-map
     (fn [_ _ _] (if (< (rand) prob) true false))
@@ -65,10 +65,10 @@
 
 (defn to-string
   "Print a grid as a multi-line string"
-  [grid cell empty]
+  [grid alive empty]
   (->> grid
     (grid-map
       (fn [x y v]
-        (if v cell empty)))
+        (if v alive empty)))
     (map #(join " " %))
     (join "\n")))
