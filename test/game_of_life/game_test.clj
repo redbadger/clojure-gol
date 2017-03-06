@@ -51,7 +51,8 @@
       (let [grid [[false]]
             expected [[true]]
             actual (grid-map test-fn grid)]
-        (is (= actual expected))))
+        (is (= actual expected))
+        (is (= (type actual) clojure.lang.PersistentVector))))
 
     (testing "applies fn to all cells in a 2x2 grid"
       (let [grid [[false true]
