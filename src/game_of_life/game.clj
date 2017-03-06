@@ -33,7 +33,7 @@
   "Maps over the grid applying a function of arguments [x y val]"
   [map-fn grid]
   (let [h (count grid)
-        w (count (get grid 0))]
+        w (count (first grid))]
     (mapv
       (fn [y]
         (mapv
