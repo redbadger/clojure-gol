@@ -33,15 +33,13 @@
   "Maps over the grid applying a function of arguments [x y val]"
   [map-fn grid]
   (let [h (count grid)
-        w (count (get grid 0))]
-    (vec
-      (map
-        (fn [y]
-          (vec
-            (map
-              (fn [x] (map-fn x y (get-cell grid x y)))
-              (range w))))
-        (range h)))))
+        w (count (first grid))]
+    (mapv
+      (fn [y]
+        (mapv
+          (fn [x] (map-fn x y (get-cell grid x y)))
+          (range w)))
+      (range h))))
 
 (defn random-grid
   "Creates a random grid of size 'width' by 'height' given a probability of a cell being alive"

@@ -45,6 +45,23 @@
           actual (count-neighbours grid 0 0)]
       (is (= actual expected)))))
 
+(deftest grid-map-test
+  (let [test-fn (fn [x y z] (not z))]
+    (testing "applies fn to all cells in a 1x1 grid"
+      (let [grid [[false]]
+            expected [[true]]
+            actual (grid-map test-fn grid)]
+        (is (= actual expected))
+        (is (= (type actual) clojure.lang.PersistentVector))))
+
+    (testing "applies fn to all cells in a 2x2 grid"
+      (let [grid [[false true]
+                  [true false]]
+            expected [[true false]
+                      [false true]]
+            actual (grid-map test-fn grid)]
+        (is (= actual expected))))))
+
 (deftest game-step-test
   (testing "a single cell dies"
     (let [grid (assoc-cell (new-grid 2 2) 0 0 true)
